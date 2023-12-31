@@ -1,0 +1,43 @@
+# Import the secrets and string modules
+import secrets
+import string
+
+# Define the character sets for the password
+lowercase = string.ascii_lowercase # All lowercase letters
+uppercase = string.ascii_uppercase # All uppercase letters
+digits = string.digits # All digits from 0 to 9
+symbols = string.punctuation # All punctuation symbols
+
+# Ask the user for the desired password length
+length = int(input("Enter the password length: "))
+
+# Ask the user for the desired password complexity
+complexity = int(input("Enter the password complexity from 1 to 4: "))
+
+# Create an empty list to store the password characters
+password = []
+
+# Generate the password characters according to the complexity level
+if complexity == 1: # Only lowercase letters
+    for i in range(length):
+        password.append(secrets.choice(lowercase))
+elif complexity == 2: # Lowercase and uppercase letters
+    for i in range(length):
+        password.append(secrets.choice(lowercase + uppercase))
+elif complexity == 3: # Lowercase, uppercase, and digits
+    for i in range(length):
+        password.append(secrets.choice(lowercase + uppercase + digits))
+elif complexity == 4: # Lowercase, uppercase, digits, and symbols
+    for i in range(length):
+        password.append(secrets.choice(lowercase + uppercase + digits + symbols))
+else: # Invalid complexity level
+    print("Invalid complexity level. Please enter a number from 1 to 4.")
+
+# Shuffle the password characters to make them more random
+secrets.SystemRandom().shuffle(password)
+
+# Join the password characters into a string
+password = "".join(password)
+
+# Print the generated password
+print("Your password is:", password)
